@@ -58,9 +58,9 @@ Hovedadresse: https://nordicwebz424.vercel.app
 
 Kontroller i Vercel at Git-kilden er `falkrynningeivind-svg/NordicWebz`, produksjonsgrenen er `main`, prosjektroten er repository-roten og rammeverket er Next.js. En publisering skal bygge samme commit-SHA som GitHub viser. Behold tidligere publiseringer for eventuell tilbakeføring.
 
-Animasjonene bruker GSAP og SplitText, med opprydding ved pause, endret skjermbredde og redusert bevegelse. Knappen «Pause animasjoner» i footer husker brukerens valg lokalt. Ingen kontinuerlige dekorative animasjoner kjører automatisk; stripen og bildeflatene følger scrolling. 3D-respons og magnetiske knapper brukes bare med presis peker på større skjermer.
+Animasjonene bruker GSAP og SplitText, med opprydding ved pause, endret skjermbredde og redusert bevegelse. Knappen «Pause animasjoner» i footer husker brukerens valg lokalt. Ingen kontinuerlige dekorative animasjoner kjører automatisk; bildeflatene følger scrolling. 3D-respons og magnetiske knapper brukes bare med presis peker på større skjermer.
 
-24-timerstilbudet gjelder en **første prototype etter at behov og retning er avklart**, ikke en ferdig nettside. Videre utvikling skjer sammen med kunden. Innholdet ligger i hero, prosess, stripe og FAQ.
+24-timerstilbudet gjelder en **første prototype etter at behov og retning er avklart**, ikke en ferdig nettside. Videre utvikling skjer sammen med kunden. Innholdet ligger i hero, prosess og FAQ.
 
 `.openai/hosting.json` identifiserer en separat privat Sites-visning. Den endrer ikke Vercel-prosjektet eller domenet.
 

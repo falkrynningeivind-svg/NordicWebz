@@ -61,33 +61,6 @@ export default function StudioEffects() {
           },
         });
       });
-      gsap.fromTo(
-        '.ribbon-track',
-        { xPercent: -3 },
-        {
-          xPercent: -18,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: '.motion-band',
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: 0.8,
-          },
-        },
-      );
-      gsap.from('.quality-grid > div', {
-        y: 30,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.12,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.quality-grid',
-          start: 'top 88%',
-          once: true,
-        },
-        clearProps: 'transform,opacity',
-      });
       gsap.from('.service-card', {
         y: 65,
         rotationY: -12,
