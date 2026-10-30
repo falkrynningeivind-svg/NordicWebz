@@ -184,7 +184,11 @@ export function Footer() {
           <span>Design med omtanke.</span>
         </div>
         <div className="footer-wordmark" aria-hidden="true">
-          NordicWebz.
+          {'NordicWebz.'.split('').map((letter, index) => (
+            <span className="footer-wordmark-char" key={index}>
+              {letter}
+            </span>
+          ))}
         </div>
       </div>
     </footer>

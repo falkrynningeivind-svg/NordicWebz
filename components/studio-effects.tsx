@@ -24,6 +24,25 @@ export default function StudioEffects() {
         ease: 'power3.out',
         clearProps: 'transform,opacity',
       });
+      const wordmark = document.querySelector('.footer-wordmark');
+      if (wordmark) {
+        gsap.fromTo(
+          wordmark.querySelectorAll('.footer-wordmark-char'),
+          { yPercent: 120, rotation: 8 },
+          {
+            yPercent: 0,
+            rotation: 0,
+            duration: 1.15,
+            stagger: 0.065,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: wordmark,
+              start: 'top 95%',
+              toggleActions: 'play none none reverse',
+            },
+          },
+        );
+      }
       gsap.utils
         .toArray<HTMLElement>('[data-scroll-media]')
         .forEach((element) => {

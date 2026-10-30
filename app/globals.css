@@ -1570,6 +1570,11 @@ h3 {
   letter-spacing: -0.075em;
   padding-top: 50px;
   white-space: nowrap;
+  overflow: hidden;
+}
+.footer-wordmark-char {
+  display: inline-block;
+  transform-origin: 50% 100%;
 }
 .reveal.will-reveal {
   opacity: 0;
