@@ -45,3 +45,7 @@ npm run dev
 ```
 
 Dette gjør den eldre reserveversjonen redigerbar. Det aktiverer ikke det låste miljøutkastet eller Vercel-tilgang.
+
+## Kontroller av reserveversjonen
+
+`npm ci`, `npm run typecheck` og `npm run build` besto. Alle fem eksisterende Playwright-tester besto med Chromium: metadata/priser/lenker, skjemavalidering og ikke-sendt-status, tastaturdialog, mobilmeny og skjermbredder, samt automatiske WCAG-kontroller. Dette bekrefter reserveversjonens funksjoner, ikke samsvar med den nyere godkjente versjonen.
