@@ -84,13 +84,16 @@ export function Portfolio() {
         <dialog
           ref={dialog}
           className="project-dialog"
-          onClose={() => trigger.current?.focus()}
+          aria-labelledby="project-dialog-title"
+          onClose={() => trigger.current?.focus({ preventScroll: true })}
           onClick={(e) => {
             if (e.target === e.currentTarget) dialog.current?.close();
           }}
         >
           <div className="dialog-top">
-            <span>Eksempelprosjekt · {p.category}</span>
+            <span id="project-dialog-title">
+              Eksempelprosjekt · {p.category}
+            </span>
             <button
               type="button"
               aria-label="Lukk prosjekt"

@@ -1005,6 +1005,9 @@ h3 {
   border-radius: 50%;
 }
 .project-dialog {
+  position: fixed;
+  inset: 0;
+  margin: auto;
   width: min(950px, 95vw);
   padding: 25px;
   border: 1px solid #a6b199;
@@ -2303,6 +2306,7 @@ html[data-motion-paused='true'] .showcase-window {
   position: relative;
   isolation: isolate;
   overflow: clip;
+  overflow-anchor: none;
 }
 .hero > .container {
   position: relative;

@@ -222,7 +222,9 @@ export default function StudioEffects() {
       let detailsRefresh: gsap.core.Tween | undefined;
       const refreshAfterToggle = () => {
         detailsRefresh?.kill();
-        detailsRefresh = gsap.delayedCall(0.45, () => ScrollTrigger.refresh());
+        detailsRefresh = gsap.delayedCall(0.45, () =>
+          ScrollTrigger.refresh(true),
+        );
       };
       details.forEach((detail) =>
         detail.addEventListener('toggle', refreshAfterToggle),
@@ -398,7 +400,7 @@ export default function StudioEffects() {
       },
     );
     document.fonts.ready.then(() => {
-      if (!disposed) ScrollTrigger.refresh();
+      if (!disposed) ScrollTrigger.refresh(true);
     });
     return () => {
       disposed = true;

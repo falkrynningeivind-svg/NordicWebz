@@ -268,3 +268,94 @@ test('animasjoner kan pauses, gjenopptas og huskes etter ny innlasting', async (
   ).toHaveAttribute('aria-pressed', 'false');
   expect(errors).toEqual([]);
 });
+
+test('oppdatering på toppen beholder posisjonen og menylenker fungerer fortsatt', async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  for (const width of [1440, 2560, 390]) {
+    await page.setViewportSize({ width, height: 1000 });
+    await page.goto('/');
+    await expect(page.locator('.motion-word').first()).toBeAttached();
+    await page.evaluate(() => document.fonts.ready);
+    await page.evaluate(() => scrollTo({ top: 0, behavior: 'instant' }));
+    await page.reload({ waitUntil: 'networkidle' });
+    const maxScroll = await page.evaluate(
+      () =>
+        new Promise<number>((resolve) => {
+          const start = performance.now();
+          let max = scrollY;
+          const sample = () => {
+            max = Math.max(max, scrollY);
+            if (performance.now() - start < 700) requestAnimationFrame(sample);
+            else resolve(max);
+          };
+          sample();
+        }),
+    );
+    expect(
+      maxScroll,
+      `Scroll etter oppdatering på ${width}px`,
+    ).toBeLessThanOrEqual(1);
+  }
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.goto('/');
+  await page.locator('.desktop-nav a[href="#priser"]').click();
+  const priceTop = () =>
+    page.locator('#priser').evaluate((el) => el.getBoundingClientRect().top);
+  await expect
+    .poll(async () => Math.abs((await priceTop()) - 110))
+    .toBeLessThanOrEqual(60);
+  await expect(page.locator('#priser h2')).toBeInViewport();
+  await page.reload({ waitUntil: 'networkidle' });
+  await expect
+    .poll(async () => Math.abs((await priceTop()) - 110))
+    .toBeLessThanOrEqual(60);
+  await expect(page.locator('#priser h2')).toBeInViewport();
+});
+
+test('alle prosjektvinduer er sentrert og lukking beholder scroll og fokus', async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  for (const viewport of [
+    { width: 1440, height: 1000 },
+    { width: 2560, height: 1440 },
+    { width: 390, height: 844 },
+    { width: 640, height: 360 },
+  ]) {
+    await page.setViewportSize(viewport);
+    await page.goto('/');
+    await page.evaluate(() => document.fonts.ready);
+    for (let i = 0; i < 3; i++) {
+      await page.locator('.project-tabs button').nth(i).click();
+      const open = page.locator('.project-open');
+      await open.scrollIntoViewIfNeeded();
+      await open.click();
+      const before = await page.evaluate(() => scrollY);
+      const modal = page.getByRole('dialog', { name: /Eksempelprosjekt/ });
+      await expect(modal).toBeVisible();
+      const rect = await modal.boundingBox();
+      expect(rect).not.toBeNull();
+      expect(
+        Math.abs(rect!.x + rect!.width / 2 - viewport.width / 2),
+      ).toBeLessThanOrEqual(2);
+      expect(
+        Math.abs(rect!.y + rect!.height / 2 - viewport.height / 2),
+      ).toBeLessThanOrEqual(2);
+      expect(rect!.y).toBeGreaterThanOrEqual(0);
+      expect(rect!.y + rect!.height).toBeLessThanOrEqual(viewport.height);
+      if (i === 0) await page.keyboard.press('Escape');
+      else if (i === 1)
+        await page
+          .getByRole('button', { name: 'Lukk prosjekt', exact: true })
+          .click();
+      else await page.mouse.click(3, viewport.height / 2);
+      await expect(modal).not.toBeVisible();
+      await expect(open).toBeFocused();
+      expect(
+        Math.abs((await page.evaluate(() => scrollY)) - before),
+      ).toBeLessThanOrEqual(2);
+    }
+  }
+});
