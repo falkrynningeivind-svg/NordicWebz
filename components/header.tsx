@@ -18,6 +18,7 @@ export function Header() {
   }, [open]);
   return (
     <header className="header">
+      <div className="scroll-progress" aria-hidden="true" />
       <div className="container header-inner">
         <Logo />
         <nav className="desktop-nav" aria-label="Hovedmeny">

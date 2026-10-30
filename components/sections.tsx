@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import { reasons, steps, navigation, site } from '@/lib/content';
 import { Logo } from './ui';
+import { MotionToggle } from './motion-toggle';
 export function ProblemSection() {
   return (
     <section className="section problem">
@@ -65,15 +66,22 @@ export function Process() {
       <div className="container">
         <div className="split-heading">
           <h2>
-            En god nettside.
+            Fra idé til prototype.
             <br />
-            Fire enkle steg.
+            <span className="prototype-emphasis">Innen 24 timer.</span>
           </h2>
           <p className="heading-aside">
-            Du kan faget ditt.
-            <br />
-            Vi gjør det synlig på nett.
+            Når vi har avklart behovene dine, lager vi en første prototype innen
+            24 timer. Deretter utvikler vi nettsiden sammen med deg, steg for
+            steg.
           </p>
+        </div>
+        <div className="prototype-path" aria-label="Slik jobber vi sammen">
+          <span>Din idé</span>
+          <span aria-hidden="true">↗</span>
+          <span>Prototype på 24 t</span>
+          <span aria-hidden="true">↗</span>
+          <span>Vi utvikler sammen</span>
         </div>
         <div className="steps">
           {steps.map((step, i) => (
@@ -181,7 +189,7 @@ export function Footer() {
           <span>
             © {new Date().getFullYear()} NordicWebz. Alle rettigheter reservert.
           </span>
-          <span>Design med omtanke.</span>
+          <MotionToggle />
         </div>
         <div className="footer-wordmark" aria-hidden="true">
           {'NordicWebz.'.split('').map((letter, index) => (

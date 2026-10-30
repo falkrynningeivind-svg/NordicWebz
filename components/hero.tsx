@@ -9,6 +9,7 @@ export function Hero() {
   const [selected, setSelected] = useState(0);
   return (
     <section id="hjem" className="hero">
+      <div className="hero-spotlight" aria-hidden="true" />
       <div className="container">
         <div className="hero-kicker">
           <span>Nettsider for bedrifter som vil videre.</span>
@@ -40,10 +41,13 @@ export function Hero() {
                 Se priser <ArrowUpRight size={17} />
               </a>
             </div>
-            <div className="hero-note">
-              <span className="hero-note-line" />
-              <span>Moderne design. Mobiltilpasset. Helt ditt.</span>
-            </div>
+            <a className="hero-note prototype-link" href="#prosessen">
+              <span className="prototype-dot" aria-hidden="true" />
+              <span>
+                Prototype innen <strong>24 timer.</strong> Så bygger vi sammen.
+              </span>
+              <ArrowUpRight size={12} aria-hidden="true" />
+            </a>
           </div>
           <div className="hero-showcase">
             <div className="showcase-heading">

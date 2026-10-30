@@ -123,12 +123,12 @@ export const steps = [
     text: 'Vi snakker om bedriften, kundene og hva dere ønsker å oppnå. Sammen avklarer vi omfang og tidsplan.',
   },
   {
-    title: 'Vi designer',
-    text: 'Vi finner strukturen og det visuelle uttrykket som passer bedriften. Du er med og gir innspill.',
+    title: 'Prototype innen 24 timer',
+    text: 'Fra vi har avklart behov og retning, lager vi et første visuelt utkast innen 24 timer. Du får se hvordan nettsiden kan bli før vi utvikler videre.',
   },
   {
-    title: 'Vi bygger',
-    text: 'Designet blir til en fungerende nettside, tilpasset mobil, nettbrett og PC.',
+    title: 'Vi utvikler sammen',
+    text: 'Du gir tilbakemeldinger. Vi justerer design, innhold og funksjoner sammen med deg, og bygger en nettside som passer bedriften din.',
   },
   {
     title: 'Klar for lansering',
@@ -175,6 +175,11 @@ export const faqs = [
   {
     question: 'Hva koster en nettside?',
     answer: `En enkel nettside koster ${packages[0].price} kr. Premium koster ${packages[1].price} kr, og forbedring av en eksisterende nettside koster ${packages[2].price} kr. Krever prosjektet noe utover standardpakken, gir vi et tilpasset tilbud.`,
+  },
+  {
+    question: 'Hva får vi innen 24 timer?',
+    answer:
+      'Når vi har avklart behovene dine og retningen for prosjektet, lager vi en første prototype innen 24 timer. Det er et visuelt utkast, ikke en ferdig nettside. Deretter videreutvikler vi design, innhold og funksjoner sammen med deg. Tidsplanen for lansering avtaler vi separat.',
   },
   {
     question: 'Hva er forskjellen på Enkel og Premium?',

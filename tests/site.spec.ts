@@ -226,3 +226,45 @@ test('animasjoner avsluttes og redusert bevegelse respekteres', async ({
   await expect(page.locator('.steps')).not.toHaveClass(/has-card-stack/);
   expect(errors).toEqual([]);
 });
+
+test('animasjoner kan pauses, gjenopptas og huskes etter ny innlasting', async ({
+  page,
+}) => {
+  const errors: string[] = [];
+  page.on('pageerror', (error) => errors.push(error.message));
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.goto('/');
+  await expect(page.locator('.motion-word').first()).toBeAttached();
+  await page
+    .getByRole('button', { name: 'Pause animasjoner', exact: true })
+    .click();
+  await expect(page.locator('html')).toHaveAttribute(
+    'data-motion-paused',
+    'true',
+  );
+  await expect(page.locator('.motion-word')).toHaveCount(0);
+  await expect(page.locator('.steps')).not.toHaveClass(/has-card-stack/);
+  await expect(page.locator('.drawing-pencil')).not.toBeVisible();
+  await expect(page.locator('.footer-wordmark-char').first()).toHaveCSS(
+    'transform',
+    'none',
+  );
+  await page.reload();
+  await expect(
+    page.getByRole('button', { name: 'Slå på animasjoner', exact: true }),
+  ).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.locator('.motion-word')).toHaveCount(0);
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await expect(
+    page.getByRole('button', { name: 'Redusert bevegelse', exact: true }),
+  ).toBeDisabled();
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page
+    .getByRole('button', { name: 'Slå på animasjoner', exact: true })
+    .click();
+  await expect(page.locator('.motion-word').first()).toBeAttached();
+  await expect(
+    page.getByRole('button', { name: 'Pause animasjoner', exact: true }),
+  ).toHaveAttribute('aria-pressed', 'false');
+  expect(errors).toEqual([]);
+});

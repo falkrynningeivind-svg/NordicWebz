@@ -52,14 +52,15 @@ Kontroller faktisk mottak hos skjemaleverandøren. Mottakeren må håndtere serv
 
 ## GitHub og Vercel
 
-Denne utgaven ligger på grenen `rebuild/video-reference`. Den er holdt utenfor `main` for at en uferdig gjenoppretting ikke skulle erstatte den gamle siden automatisk.
+Produksjonskoden ligger på `main`, og Vercel bygger automatisk nye commits derfra. Versjonen `b5d3757` (med animert footer) er det valgte utgangspunktet; videre endringer bygger videre på denne og etterfølgende godkjente endringer.
 
-Når denne utgaven skal bli hovedsiden:
+Hovedadresse: https://nordicwebz424.vercel.app
 
-1. Kontroller resultatet og slå den testede grenen sammen med `main`.
-2. Kontroller i Vercel at Git-kilden er `falkrynningeivind-svg/NordicWebz`, produksjonsgrenen er `main`, prosjektroten er repository-roten og rammeverket er Next.js. Fjern eventuelle gamle prosjektinnstillinger som overstyrer bygg eller output-mappe.
-3. Kontroller at publiseringen bygger den samme commit-SHA-en som GitHub viser. Ikke publiser direkte fra en lokal mappe med usikrede endringer.
-4. Behold den tidligere godkjente Vercel-publiseringen som referanse og mulig tilbakeføring.
+Kontroller i Vercel at Git-kilden er `falkrynningeivind-svg/NordicWebz`, produksjonsgrenen er `main`, prosjektroten er repository-roten og rammeverket er Next.js. En publisering skal bygge samme commit-SHA som GitHub viser. Behold tidligere publiseringer for eventuell tilbakeføring.
+
+Animasjonene bruker GSAP og SplitText, med opprydding ved pause, endret skjermbredde og redusert bevegelse. Knappen «Pause animasjoner» i footer husker brukerens valg lokalt. Ingen kontinuerlige dekorative animasjoner kjører automatisk; stripen og bildeflatene følger scrolling. 3D-respons og magnetiske knapper brukes bare med presis peker på større skjermer.
+
+24-timerstilbudet gjelder en **første prototype etter at behov og retning er avklart**, ikke en ferdig nettside. Videre utvikling skjer sammen med kunden. Innholdet ligger i hero, prosess, stripe og FAQ.
 
 `.openai/hosting.json` identifiserer en separat privat Sites-visning. Den endrer ikke Vercel-prosjektet eller domenet.
 

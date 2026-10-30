@@ -25,7 +25,7 @@ export function Portfolio() {
         </div>
         <div className="portfolio-stage" data-scroll-media>
           <div className="project-preview">
-            <ConceptPreview project={p} />
+            <ConceptPreview key={p.id} project={p} />
             <button
               ref={trigger}
               type="button"
@@ -99,7 +99,7 @@ export function Portfolio() {
               <X size={22} />
             </button>
           </div>
-          <ConceptPreview project={p} />
+          <ConceptPreview key={p.id} project={p} />
           <p>
             Et illustrerende designkonsept fra NordicWebz. Dette er ikke et
             levert kundeprosjekt.
