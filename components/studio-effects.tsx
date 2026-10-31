@@ -130,23 +130,28 @@ export default function StudioEffects() {
       const navLinks = document.querySelectorAll<HTMLAnchorElement>(
         '.desktop-nav a, .mobile-nav a',
       );
-      ['tjenester', 'prosjekter', 'om-oss', 'priser', 'kontakt'].forEach(
-        (id) => {
-          ScrollTrigger.create({
-            trigger: '#' + id,
-            start: 'top 35%',
-            end: 'bottom 35%',
-            onToggle(self) {
-              if (self.isActive)
-                navLinks.forEach((link) => {
-                  if (link.hash === '#' + id)
-                    link.setAttribute('aria-current', 'location');
-                  else link.removeAttribute('aria-current');
-                });
-            },
-          });
-        },
-      );
+      [
+        'tjenester',
+        'prosjekter',
+        'prosessen',
+        'om-oss',
+        'priser',
+        'kontakt',
+      ].forEach((id) => {
+        ScrollTrigger.create({
+          trigger: '#' + id,
+          start: 'top 35%',
+          end: 'bottom 35%',
+          onToggle(self) {
+            if (self.isActive)
+              navLinks.forEach((link) => {
+                if (link.hash === '#' + id)
+                  link.setAttribute('aria-current', 'location');
+                else link.removeAttribute('aria-current');
+              });
+          },
+        });
+      });
       const wordmark = document.querySelector('.footer-wordmark');
       if (wordmark) {
         gsap.fromTo(

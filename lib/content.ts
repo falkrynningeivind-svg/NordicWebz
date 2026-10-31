@@ -11,6 +11,7 @@ export const site = {
 export const navigation = [
   ['Tjenester', 'tjenester'],
   ['Prosjekter', 'prosjekter'],
+  ['Prosessen', 'prosessen'],
   ['Om oss', 'om-oss'],
   ['Priser', 'priser'],
   ['Kontakt', 'kontakt'],

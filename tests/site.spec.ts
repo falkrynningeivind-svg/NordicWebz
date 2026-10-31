@@ -33,6 +33,7 @@ test('metadata, priser og alle interne lenker er korrekte', async ({
   await expect(page.locator('.desktop-nav a')).toHaveText([
     'Tjenester',
     'Prosjekter',
+    'Prosessen',
     'Om oss',
     'Priser',
     'Kontakt',
