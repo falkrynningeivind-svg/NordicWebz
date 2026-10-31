@@ -360,3 +360,61 @@ test('alle prosjektvinduer er sentrert og lukking beholder scroll og fokus', asy
     }
   }
 });
+
+test('snarveiene stopper med riktig seksjon rett under toppmenyen', async ({
+  page,
+}) => {
+  test.setTimeout(60_000);
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  for (const width of [2560, 1440, 390]) {
+    await page.setViewportSize({ width, height: 1000 });
+    await page.goto('/');
+    for (const id of ['kontakt', 'prosjekter', 'priser', 'prosessen']) {
+      const nav = page.locator(width < 760 ? '#mobile-menu' : '.desktop-nav');
+      if (width < 760)
+        await page.getByRole('button', { name: 'Åpne meny' }).click();
+      await nav.locator(`a[href="#${id}"]`).click();
+      await expect(page).toHaveURL(new RegExp(`#${id}$`));
+      const offset = () =>
+        page.evaluate((id) => {
+          const section = document.getElementById(id)!;
+          const header = document.querySelector('.header-inner')!;
+          return Math.abs(
+            section.getBoundingClientRect().top -
+              header.getBoundingClientRect().bottom,
+          );
+        }, id);
+      await expect
+        .poll(offset, { message: `${id} på ${width}px` })
+        .toBeLessThanOrEqual(1);
+      if (width < 760) await expect(nav).not.toBeVisible();
+      const maxOffset = await page.evaluate(
+        (id) =>
+          new Promise<number>((resolve) => {
+            const start = performance.now();
+            let max = 0;
+            const sample = () => {
+              max = Math.max(
+                max,
+                Math.abs(
+                  document.getElementById(id)!.getBoundingClientRect().top -
+                    document
+                      .querySelector('.header-inner')!
+                      .getBoundingClientRect().bottom,
+                ),
+              );
+              if (performance.now() - start < 250)
+                requestAnimationFrame(sample);
+              else resolve(max);
+            };
+            sample();
+          }),
+        id,
+      );
+      expect(
+        maxOffset,
+        `Stabil plassering av ${id} på ${width}px`,
+      ).toBeLessThanOrEqual(1);
+    }
+  }
+});

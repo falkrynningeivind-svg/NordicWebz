@@ -14,6 +14,7 @@ import { Contact } from '@/components/contact';
 import { Reveal } from '@/components/reveal';
 import { Services } from '@/components/services';
 import { StudioMotion } from '@/components/studio-motion';
+import { SectionNavigation } from '@/components/section-navigation';
 export default function Home() {
   return (
     <>
@@ -33,6 +34,7 @@ export default function Home() {
       <Footer />
       <Reveal />
       <StudioMotion />
+      <SectionNavigation />
     </>
   );
 }

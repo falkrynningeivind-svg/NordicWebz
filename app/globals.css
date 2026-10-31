@@ -31,13 +31,14 @@
   --blue: #293b85;
   color-scheme: dark;
   --gutter: clamp(24px, 5vw, 80px);
+  --header-height: 92px;
 }
 * {
   box-sizing: border-box;
 }
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 110px;
+  scroll-padding-top: var(--header-height);
 }
 body {
   margin: 0;
@@ -227,7 +228,7 @@ h3 {
   backdrop-filter: blur(18px);
 }
 .header-inner {
-  height: 92px;
+  height: var(--header-height);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1667,12 +1668,10 @@ h3 {
 @media (max-width: 760px) {
   :root {
     --gutter: 24px;
+    --header-height: 72px;
   }
   .section {
     padding-block: 75px;
-  }
-  .header-inner {
-    height: 72px;
   }
   .logo {
     font-size: 19px;
