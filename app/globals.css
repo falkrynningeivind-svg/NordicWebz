@@ -2544,6 +2544,9 @@ html[data-motion-paused='true'] .handwritten-stroke path {
     display: flex;
     align-items: center;
   }
+  .section.problem {
+    min-height: 0;
+  }
   .section > .container {
     width: 100%;
   }
