@@ -3090,8 +3090,8 @@ html[data-motion-paused='true'] .handwritten-stroke path {
     line-height: 1.65;
   }
   .about-reasons {
-    margin-top: clamp(20px, 3vh, 48px);
-    padding-top: clamp(16px, 2.2vh, 32px);
+    margin-top: clamp(28px, calc(14vh - 64px), 144px);
+    padding-top: clamp(20px, 4vh, 56px);
   }
   .about-reasons h2 {
     font-size: clamp(26px, 3.8vh, 54px);
