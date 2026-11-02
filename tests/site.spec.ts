@@ -418,3 +418,114 @@ test('snarveiene stopper med riktig seksjon rett under toppmenyen', async ({
     }
   }
 });
+
+test('hele seksjonene får plass på vanlige PC-vinduer uten å klippe innhold', async ({
+  page,
+}) => {
+  test.setTimeout(60_000);
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  for (const [width, height] of [
+    [1280, 600],
+    [1280, 720],
+    [1366, 768],
+    [1440, 900],
+    [1920, 1080],
+    [2560, 1440],
+  ]) {
+    await page.setViewportSize({ width, height });
+    await page.goto('/');
+    await page.evaluate(() => document.fonts.ready);
+    const layout = await page.evaluate(() => {
+      const available =
+        innerHeight -
+        document.querySelector('.header-inner')!.getBoundingClientRect().height;
+      return [...document.querySelectorAll<HTMLElement>('main > section')].map(
+        (section) => {
+          const rect = section.getBoundingClientRect();
+          const content = section
+            .querySelector('.container')!
+            .getBoundingClientRect();
+          return {
+            id: section.id || section.className,
+            height: rect.height,
+            available,
+            contentInside:
+              content.top >= rect.top - 1 && content.bottom <= rect.bottom + 1,
+          };
+        },
+      );
+    });
+    for (const section of layout) {
+      expect(
+        section.height,
+        `${section.id} ved ${width}×${height}`,
+      ).toBeLessThanOrEqual(section.available + 2);
+      expect(
+        section.contentInside,
+        `Innholdet i ${section.id} ved ${width}×${height}`,
+      ).toBe(true);
+    }
+    expect(
+      await page.evaluate(
+        () => document.documentElement.scrollWidth <= innerWidth,
+      ),
+    ).toBe(true);
+    await expect(page.locator('.stack-step')).toHaveCount(4);
+    await expect(page.locator('.price-card li')).toHaveCount(20);
+  }
+});
+
+test('mobil og iPad beholder lesbare berøringsoppsett og alle prosessteg', async ({
+  browser,
+}) => {
+  test.setTimeout(60_000);
+  for (const [width, height] of [
+    [375, 667],
+    [390, 844],
+    [768, 1024],
+    [820, 1180],
+    [1024, 768],
+    [1180, 820],
+  ]) {
+    const context = await browser.newContext({
+      viewport: { width, height },
+      hasTouch: true,
+      isMobile: true,
+      reducedMotion: 'reduce',
+    });
+    const page = await context.newPage();
+    await page.goto('/');
+    await page.evaluate(() => document.fonts.ready);
+    expect(
+      await page.evaluate(
+        () => document.documentElement.scrollWidth <= innerWidth,
+      ),
+      `${width}×${height}`,
+    ).toBe(true);
+    await expect(
+      page.getByRole('button', { name: 'Åpne meny', exact: true }),
+    ).toBeVisible();
+    await expect(page.locator('#name')).toHaveCSS('font-size', '16px');
+    expect(
+      await page
+        .locator('#name')
+        .evaluate((el) => el.getBoundingClientRect().height),
+    ).toBeGreaterThanOrEqual(44);
+    await expect(page.locator('.stack-step')).toHaveCount(4);
+    for (const step of await page.locator('.stack-step').all()) {
+      expect(
+        await step.evaluate((el) => el.scrollHeight <= el.clientHeight + 2),
+      ).toBe(true);
+    }
+    await page.getByRole('button', { name: 'Åpne meny', exact: true }).click();
+    await page.locator('#mobile-menu a[href="#prosessen"]').click();
+    await expect(page.locator('#prosessen h2')).toBeInViewport();
+    await expect(page.locator('#mobile-menu')).not.toBeVisible();
+    await page.locator('.service-card').nth(1).click();
+    await expect(page.locator('.service-card').nth(1)).toHaveAttribute(
+      'aria-expanded',
+      'true',
+    );
+    await context.close();
+  }
+});

@@ -353,7 +353,7 @@ export default function StudioEffects() {
       },
     );
     media.add(
-      '(min-width: 900px) and (prefers-reduced-motion: no-preference)',
+      '(min-width: 1000px) and (min-height: 1100px) and (hover: hover) and (prefers-reduced-motion: no-preference)',
       () => {
         const steps = gsap.utils.toArray<HTMLElement>('.stack-step');
         document.querySelector('.steps')?.classList.add('has-card-stack');
