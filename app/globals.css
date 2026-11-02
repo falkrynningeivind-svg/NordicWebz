@@ -245,14 +245,11 @@ h3 {
   white-space: nowrap;
 }
 .logo-icon {
+  display: block;
+  width: 0.86em;
+  height: 1em;
+  flex-shrink: 0;
   font-size: 23px;
-  color: #c6ccff;
-  font-weight: 700;
-  line-height: 1;
-  -webkit-text-stroke: 0.8px var(--accent);
-  color: transparent;
-  letter-spacing: -0.1em;
-  transform: skewY(-7deg);
   margin-right: 3px;
 }
 .desktop-nav {

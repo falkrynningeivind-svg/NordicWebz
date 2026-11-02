@@ -3,9 +3,14 @@ import type { ReactNode } from 'react';
 export function Logo() {
   return (
     <a href="#hjem" className="logo">
-      <span className="logo-icon" aria-hidden="true">
-        N
-      </span>
+      <img
+        className="logo-icon"
+        src="/logo-mark.svg"
+        alt=""
+        aria-hidden="true"
+        width="100"
+        height="116"
+      />
       <span>NordicWebz.</span>
     </a>
   );
