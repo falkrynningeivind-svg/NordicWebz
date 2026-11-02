@@ -6,6 +6,7 @@ const alignedSections = new Set([
   'priser',
   'kontakt',
   'prosjekter',
+  'om-oss',
 ]);
 
 export function SectionNavigation() {

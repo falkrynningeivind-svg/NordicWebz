@@ -1058,9 +1058,6 @@ h3 {
 .process {
   padding-bottom: 85px;
 }
-.why {
-  padding-top: 60px;
-}
 .reasons-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1084,7 +1081,7 @@ h3 {
   background: #1e251b;
   padding-block: 90px;
 }
-.about .split-heading {
+.about-intro .split-heading {
   display: block;
   margin-bottom: 50px;
 }
@@ -2009,7 +2006,7 @@ h3 {
   .about-body p {
     font-size: 14px;
   }
-  .about .split-heading {
+  .about-intro .split-heading {
     margin-bottom: 35px;
   }
   .faq-layout {
@@ -2682,7 +2679,7 @@ html[data-motion-paused='true'] .handwritten-stroke path {
     font-size: clamp(30px, min(3.6vw, 4.8vh), 53px);
   }
   .problem .split-heading,
-  .about .split-heading {
+  .about-intro .split-heading {
     margin-bottom: clamp(24px, 4vh, 50px);
   }
   .reasons-grid {
@@ -3036,5 +3033,123 @@ html[data-motion-paused='true'] .handwritten-stroke path {
   .hero-showcase {
     max-width: min(100%, calc(var(--screen-space) * 0.7));
     margin-top: 36px;
+  }
+}
+
+/* One green About section, with the introduction above the shared values. */
+.about-intro {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 18px 40px;
+  align-items: center;
+}
+.about-intro > .split-heading {
+  grid-column: 1;
+  grid-row: 1;
+  margin-bottom: 0;
+}
+.about-intro .about-body {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  margin: 0;
+  max-width: none;
+  gap: 30px;
+}
+.about-intro > .text-link {
+  grid-column: 1;
+  grid-row: 2;
+  justify-self: start;
+  margin-top: 0;
+}
+.about-reasons {
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid #48503e;
+}
+.about-reasons .split-heading {
+  margin-bottom: 28px;
+}
+.about-reasons h2 {
+  font-size: clamp(30px, 3.6vw, 54px);
+}
+.about-reasons .reasons-grid {
+  gap: 24px 60px;
+}
+.about-reasons .reasons-grid p {
+  max-width: none;
+}
+@media (min-width: 1000px) and (hover: hover) {
+  .about-intro {
+    gap: 16px 40px;
+  }
+  .about-intro .about-badge {
+    margin-top: 12px;
+  }
+  .about-intro .about-body p {
+    font-size: clamp(13px, 1.3vh, 15px);
+    line-height: 1.65;
+  }
+  .about-reasons {
+    margin-top: clamp(20px, 3vh, 48px);
+    padding-top: clamp(16px, 2.2vh, 32px);
+  }
+  .about-reasons h2 {
+    font-size: clamp(26px, 3.8vh, 54px);
+  }
+  .about-reasons .split-heading {
+    margin-bottom: clamp(14px, 2vh, 28px);
+  }
+  .about-reasons .reasons-grid {
+    gap: clamp(12px, 1.8vh, 26px) 50px;
+  }
+  .about-reasons .reasons-grid article {
+    padding-top: clamp(10px, 1.5vh, 22px);
+  }
+  .about-reasons .reasons-grid h3 {
+    font-size: clamp(16px, 1.8vh, 19px);
+    margin-bottom: 6px;
+  }
+  .about-reasons .reasons-grid p {
+    font-size: clamp(12px, 1.2vh, 13px);
+    line-height: 1.6;
+  }
+}
+@media (max-width: 999px),
+  (min-width: 1000px) and (max-width: 1366px) and (hover: none) {
+  .about-intro {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .about-intro > .split-heading,
+  .about-intro .about-body,
+  .about-intro > .text-link {
+    grid-column: auto;
+    grid-row: auto;
+  }
+  .about-intro .about-body {
+    gap: 24px;
+  }
+  .about-reasons {
+    margin-top: 36px;
+    padding-top: 28px;
+  }
+}
+@media (max-width: 760px) {
+  .about-reasons .split-heading {
+    display: block;
+  }
+  .about-reasons .heading-aside {
+    margin-top: 20px;
+  }
+  .about-intro .about-body {
+    grid-template-columns: 1fr;
+  }
+  .about-reasons .reasons-grid {
+    gap: 25px;
+  }
+}
+@media (max-width: 380px) {
+  .about-reasons .reasons-grid {
+    grid-template-columns: 1fr;
   }
 }

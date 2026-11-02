@@ -96,63 +96,64 @@ export function Process() {
     </section>
   );
 }
-export function WhyUs() {
+function AboutReasons() {
   return (
-    <section className="section why" id="hvorfor-oss">
-      <div className="container">
-        <div className="split-heading">
-          <h2>
-            Ambisiøst design.
-            <br />
-            <span className="muted">Jordnære priser.</span>
-          </h2>
-          <p className="heading-aside">
-            Et godt samarbeid gjør en forskjell.
-            <br />
-            Her er hva du kan forvente av oss.
-          </p>
-        </div>
-        <div className="reasons-grid">
-          {reasons.map((reason) => (
-            <article className="reveal" key={reason.title}>
-              <h3>{reason.title}</h3>
-              <p>{reason.text}</p>
-            </article>
-          ))}
-        </div>
+    <div className="about-reasons" id="hvorfor-oss">
+      <div className="split-heading">
+        <h2>
+          Ambisiøst design.
+          <br />
+          <span className="muted">Jordnære priser.</span>
+        </h2>
+        <p className="heading-aside">
+          Et godt samarbeid gjør en forskjell.
+          <br />
+          Her er hva du kan forvente av oss.
+        </p>
       </div>
-    </section>
+      <div className="reasons-grid">
+        {reasons.map((reason) => (
+          <article className="reveal" key={reason.title}>
+            <h3>{reason.title}</h3>
+            <p>{reason.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
   );
 }
 export function About() {
   return (
     <section id="om-oss" className="section about">
       <div className="container">
-        <div className="split-heading">
-          <h2>
-            Vi bygger nettsider.
-            <br />
-            <span className="muted">Og gode samarbeid.</span>
-          </h2>
-          <span className="about-badge">
-            <span /> ELEVBEDRIFT · NORGE
-          </span>
+        <div className="about-intro">
+          <div className="split-heading">
+            <h2>
+              Vi bygger nettsider.
+              <br />
+              <span className="muted">Og gode samarbeid.</span>
+            </h2>
+            <span className="about-badge">
+              <span /> ELEVBEDRIFT · NORGE
+            </span>
+          </div>
+          <div className="about-body">
+            <p>
+              NordicWebz er en elevbedrift. Vi bruker interessen vår for
+              teknologi, design og entreprenørskap til å hjelpe bedrifter med å
+              få en bedre digital tilstedeværelse.
+            </p>
+            <p>
+              Vi tror at en god nettside ikke trenger å koste ekstremt mye.
+              Derfor kombinerer vi moderne design, personlig samarbeid og
+              rimelige priser.
+            </p>
+          </div>
+          <a className="text-link" href="#kontakt">
+            Bli kjent med oss <ArrowUpRight size={16} />
+          </a>
         </div>
-        <div className="about-body">
-          <p>
-            NordicWebz er en elevbedrift. Vi bruker interessen vår for
-            teknologi, design og entreprenørskap til å hjelpe bedrifter med å få
-            en bedre digital tilstedeværelse.
-          </p>
-          <p>
-            Vi tror at en god nettside ikke trenger å koste ekstremt mye. Derfor
-            kombinerer vi moderne design, personlig samarbeid og rimelige
-            priser.
-          </p>
-        </div>
-        <a className="text-link" href="#kontakt">
-          Bli kjent med oss <ArrowUpRight size={16} />
-        </a>
+        <AboutReasons />
       </div>
     </section>
   );

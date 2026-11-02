@@ -369,7 +369,13 @@ test('snarveiene stopper med riktig seksjon rett under toppmenyen', async ({
   for (const width of [2560, 1440, 390]) {
     await page.setViewportSize({ width, height: 1000 });
     await page.goto('/');
-    for (const id of ['kontakt', 'prosjekter', 'priser', 'prosessen']) {
+    for (const id of [
+      'kontakt',
+      'prosjekter',
+      'priser',
+      'prosessen',
+      'om-oss',
+    ]) {
       const nav = page.locator(width < 760 ? '#mobile-menu' : '.desktop-nav');
       if (width < 760)
         await page.getByRole('button', { name: 'Åpne meny' }).click();
@@ -472,6 +478,22 @@ test('hele seksjonene får plass på vanlige PC-vinduer uten å klippe innhold',
     ).toBe(true);
     await expect(page.locator('.stack-step')).toHaveCount(4);
     await expect(page.locator('.price-card li')).toHaveCount(20);
+    await expect(page.locator('section#hvorfor-oss')).toHaveCount(0);
+    await expect(page.locator('#om-oss .reasons-grid article')).toHaveCount(4);
+    await expect(page.locator('#om-oss')).toHaveCSS(
+      'background-color',
+      'rgb(30, 37, 27)',
+    );
+    const aboutOrder = await page.locator('#om-oss').evaluate((section) => {
+      const intro = section
+        .querySelector('.about-intro')!
+        .getBoundingClientRect();
+      const reasons = section
+        .querySelector('.about-reasons')!
+        .getBoundingClientRect();
+      return intro.bottom <= reasons.top;
+    });
+    expect(aboutOrder).toBe(true);
   }
 });
 

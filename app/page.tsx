@@ -1,12 +1,6 @@
 import { Header } from '@/components/header';
 import { Hero } from '@/components/hero';
-import {
-  ProblemSection,
-  WhyUs,
-  Process,
-  About,
-  Footer,
-} from '@/components/sections';
+import { ProblemSection, Process, About, Footer } from '@/components/sections';
 import { Pricing } from '@/components/pricing';
 import { Portfolio } from '@/components/portfolio';
 import { FAQ } from '@/components/faq';
@@ -25,7 +19,6 @@ export default function Home() {
         <Services />
         <Portfolio />
         <Process />
-        <WhyUs />
         <About />
         <FAQ />
         <Pricing />
